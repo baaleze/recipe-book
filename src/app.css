@@ -49,3 +49,28 @@ This is where the vast majority of your CSS code goes. */
   background-size: cover; /* Resize the background image to cover the entire container */
   vertical-align: bottom;
 }
+
+.recipe {
+    background-color: #ddd;
+}
+.prep-time {
+    margin-top: 20px;
+}
+.prep-time, .cuisson, .servings, .ingredients-title, .ingredients-item, .steps {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.prep-time, .cuisson, .servings, .ingredients-title{
+    font-size: 16;
+    color: #222;
+}
+
+.ingredients-item {
+    font-size: 14;
+    color: #333;
+}
+
+.steps {
+    font-size: 16;
+    margin-bottom: 30px;
+}

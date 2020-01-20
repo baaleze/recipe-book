@@ -4,11 +4,13 @@
 <ScrollView>
     <StackLayout class="recipe" *ngIf="recipe !== undefined">
         <Label class="recipe-title image" [style.backgroundImage]="baseUrl + 'img/' + recipe.img" [text]="recipe.title"></Label>
-        <Label class="prepTime" [text]="'Préparation : '+recipe.prepTime"></Label>
+        <Label class="prep-time" [text]="'Préparation : '+recipe.prepTime"></Label>
         <Label class="cuisson" [text]="'Cuisson : '+recipe.cuisson"></Label>
         <Label class="servings" [text]="'Pour '+recipe.servings+' personne(s)'"></Label>
+        <StackLayout class="hr"></StackLayout>
         <Label class="ingredients-title" text="Ingrédients :"></Label>
         <Label class="ingredients-item" *ngFor="let i of recipe.ingredients" [text]="'- ' + i.qty"></Label>
-        <Label class="steps" *ngFor="let step of recipe.steps; let i = index" [text]="i + '. ' + step"></Label>
+        <StackLayout class="hr"></StackLayout>
+        <Label class="steps" textWrap="true" *ngFor="let step of recipe.steps; let i = index" [text]="i + '. ' + step"></Label>
     </StackLayout>
 </ScrollView>
