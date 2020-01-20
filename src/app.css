@@ -51,12 +51,9 @@ This is where the vast majority of your CSS code goes. */
 }
 
 .recipe {
-    background-color: #ddd;
+    background-color: rgb(236, 219, 212);
 }
-.prep-time {
-    margin-top: 20px;
-}
-.prep-time, .cuisson, .servings, .ingredients-title, .ingredients-item, .steps {
+.prep-time, .cuisson, .servings, .ingredients-title, .ingredients-item, .steps, .tags {
     padding-left: 50px;
     padding-right: 50px;
 }
@@ -73,4 +70,9 @@ This is where the vast majority of your CSS code goes. */
 .steps {
     font-size: 16;
     margin-bottom: 30px;
+    color: #222;
+}
+
+.tags {
+    color: #666;
 }
