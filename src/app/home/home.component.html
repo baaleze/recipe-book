@@ -1,28 +1,16 @@
 <ActionBar class="action-bar">
     <Label text="Recettes" class="actionBarLabel"></Label>
 </ActionBar>
-
-<GridLayout tkExampleTitle tkToggleNavButton>
-    <RadListView [items]="recipes" marginRight="-2">
-        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical"
-            itemHeight="200" spanCount="1">
-        </ListViewGridLayout>
-        <ng-template tkListItemTemplate let-item="item">
-            <GridLayout backgroundColor="White">
-                <GridLayout>
-                    <Image src="https://placem.at/places?random=1&w=500&txt=0" stretch="aspectFill"
-                        height="180"></Image>
-                    <!-- <FrescoDrawee horizontalAlignment="stretch" height="180"
-                        imageUri="{{ item.imageSrc }}"></FrescoDrawee> -->
-                    <GridLayout verticalAlignment="bottom">
-                        <StackLayout paddingTop="8" paddingBottom="8"
-                            paddingLeft="16" paddingRight="16">
-                            <Label text="{{ item.title }}" class="locationCity"></Label>
-                            <Label text="{{ item.prepTime }} / {{ item.servings }} personnes" class="locationCountry"></Label>
-                        </StackLayout>
-                    </GridLayout>
-                </GridLayout>
-            </GridLayout>
-        </ng-template>
-    </RadListView>
-</GridLayout>
+<ScrollView>
+    <StackLayout>
+        <ListView height="200" [items]="recipesFiltered">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <DockLayout class="recipe-list-item" [style.backgroundImage]="baseUrl + 'img/' + item.img"
+                [nsRouterLink]="['/home/recipe/' + i]" pageTransition="slide">
+                    <Label dock="top" text="{{ item.title }}" class="recipe-title" ></Label>
+                    <Label dock="bottom" text="{{ item.prepTime }} / {{ item.servings }} personnes" class="recipe-info"></Label>
+                </DockLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>
+</ScrollView>

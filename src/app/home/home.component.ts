@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { knownFolders } from 'tns-core-modules/file-system';
-import * as Toast from 'nativescript-toast';
+import { Recipe } from './recipe';
+import { RecipeService } from './recipe.service';
 
 @Component({
     selector: 'Home',
@@ -9,39 +8,24 @@ import * as Toast from 'nativescript-toast';
 })
 export class HomeComponent implements OnInit {
 
-    recipes: Recipe[];
+    baseUrl: string;
 
-    constructor(private http: HttpClient) {
-        // Use the component constructor to inject providers.
+    recipesFiltered: Recipe[];
+
+    constructor(private recipeService: RecipeService) {
+        this.baseUrl = recipeService.baseUrl;
     }
 
     ngOnInit(): void {
-        this.http.get<Recipe[]>('http://vahren.fr:9090/assets/recipes.json').subscribe(
-            r => this.reloadRecipesFile(r)
-        );
+        this.recipeService.recipesFile().subscribe(r => {
+            this.recipesFiltered = r.filter(recipe => this.isFiltered(recipe));
+        });
     }
 
-    reloadRecipesFile(recipes: Recipe[]) {
-        this.recipes = recipes;
-        // save the file
-        const documents = knownFolders.documents();
-        const file = documents.getFile('recipes.json');
-
-        file.writeText(JSON.stringify(recipes))
-            .then(result => {
-                Toast.makeText('Updated recipe file').show();
-            }).catch(err => {
-                console.log(err);
-            });
+    isFiltered(recipe: Recipe): boolean {
+        return true;
     }
+    
 }
 
-export class Recipe {
-    title: string;
-    prepTime: string;
-    cuisson: string;
-    servings: number;
-    ingredients: {name: string, qty: string}[];
-    steps: string[];
-    tags: string[];
-}
+
