@@ -1,16 +1,40 @@
 <ActionBar class="action-bar">
     <Label text="Recettes" class="actionBarLabel"></Label>
 </ActionBar>
-<ScrollView>
-    <StackLayout>
-        <ListView height="200" [items]="recipesFiltered">
-            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                <DockLayout class="recipe-list-item" [style.backgroundImage]="baseUrl + 'img/' + item.img"
-                [nsRouterLink]="['/home/recipe/' + i]" pageTransition="slide">
-                    <Label dock="top" text="{{ item.title }}" class="recipe-title" ></Label>
-                    <Label dock="bottom" text="{{ item.prepTime }} / {{ item.servings }} personnes" class="recipe-info"></Label>
-                </DockLayout>
-            </ng-template>
-        </ListView>
-    </StackLayout>
-</ScrollView>
+<RadSideDrawer tkExampleTitle tkToggleNavButton>
+    <GridLayout tkDrawerContent rows="56, *" class="sideStackLayout">
+        
+        <StackLayout class="sideTitleStackLayout">
+            <Label text="Filtres"></Label>
+        </StackLayout>
+        <ScrollView row="1">
+            <StackLayout class="sideStackLayout">
+                <StackLayout orientation="horizontal" *ngFor="let tag of allTags">
+                <Switch checked="false" class="sideLabel"
+                    (checkedChange)="checkTag(tag, $event.object.checked)">
+                </Switch>
+                <Label [text]="tag" class="sideLabel"></Label>
+            </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+    <ScrollView tkMainContent class="recipe-list">
+        <StackLayout>
+            <SearchBar hint="Recherche ..."
+                [text]="filterSearch" (textChange)="changeSearch($event.object)" (submit)="changeSearch($event.object)"
+                (clear)="changeSearch($event.object)" (loaded)="clearSearchFocus($event.object)">
+            </SearchBar>
+            <ListView height="200" [items]="recipesFiltered">
+                <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <DockLayout class="recipe-list-item" [style.backgroundImage]="baseUrl + 'img/' + item.img"
+                    [nsRouterLink]="['/home/recipe/' + i]" pageTransition="slide">
+                        <Label dock="top" text="{{ item.title }}" class="recipe-title" ></Label>
+                        <Label dock="bottom" text="{{ item.prepTime }} / {{ item.servings }} personnes" class="recipe-info"></Label>
+                    </DockLayout>
+                </ng-template>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</RadSideDrawer>
+
+

@@ -7,13 +7,15 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home.component";
 import { RecipeComponent } from "./recipe.component";
 import { RecipeService } from "./recipe.service";
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         HomeRoutingModule,
         NativeScriptHttpClientModule,
-        NativeScriptFormsModule
+        NativeScriptFormsModule,
+        NativeScriptUISideDrawerModule
     ],
     declarations: [
         HomeComponent,
