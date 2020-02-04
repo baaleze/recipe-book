@@ -10,11 +10,11 @@
         <ScrollView row="1">
             <StackLayout class="sideStackLayout">
                 <StackLayout orientation="horizontal" *ngFor="let tag of allTags">
-                <Switch checked="false" class="sideLabel"
-                    (checkedChange)="checkTag(tag, $event.object.checked)">
-                </Switch>
-                <Label [text]="tag" class="sideLabel"></Label>
-            </StackLayout>
+                    <Switch checked="false" class="sideLabel"
+                        (checkedChange)="checkTag(tag, $event.object.checked)">
+                    </Switch>
+                    <Label [text]="tag" class="sideLabel"></Label>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </GridLayout>
@@ -24,7 +24,7 @@
                 [text]="filterSearch" (textChange)="changeSearch($event.object)" (submit)="changeSearch($event.object)"
                 (clear)="changeSearch($event.object)" (loaded)="clearSearchFocus($event.object)">
             </SearchBar>
-            <ListView height="200" [items]="recipesFiltered">
+            <ListView [height]="200 * recipesFiltered.length" [items]="recipesFiltered">
                 <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
                     <DockLayout class="recipe-list-item" [style.backgroundImage]="baseUrl + 'img/' + item.img"
                     [nsRouterLink]="['/home/recipe/' + i]" pageTransition="slide">
